@@ -15,7 +15,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/links", {templateUrl: "partials/link-mgmt/links-list.html"/* , controller: "repeatController" */})
 	// topics
     .when("/topics", {templateUrl: "partials/topics/showAllTopics.html", controller: "showAllTopicsController"})
-	.when("/topics-list", {templateUrl: "partials/topics/showAllTopics-list.html", controller: "showAllTopicsController-list"})
+	.when("/topics-list", {templateUrl: "partials/topics/showAllCategories-list.html", controller: "showAllCategoriesController-list"})
 	.when("/topics-list/:id", {templateUrl: "partials/topics/showTopic.html", controller: "showTopicController"})
 	.when("/topics/new", {templateUrl: "partials/topics/createTopic.html", controller: "createTopicController"})
 	.when("/topics/:id", {templateUrl: "partials/topics/updateTopic.html" , controller: "updateTopicController"})

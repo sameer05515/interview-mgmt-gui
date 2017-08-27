@@ -3,7 +3,7 @@ var app = angular.module('topicMgmtApp', [ 'ngRoute', 'ngAnimate',
 
 app.constant("topicMgmtAppConfig", {
 	"restServices" : "http://127.0.0.1:8080/RestServices/rest",
-	"interviewMgmtService":"http://127.0.0.1:8080/interview-mgmt/rest"
+	"interviewMgmtServices":"http://127.0.0.1:8080/interview-mgmt/rest"
 });
 
 app.directive('checkList', function() {

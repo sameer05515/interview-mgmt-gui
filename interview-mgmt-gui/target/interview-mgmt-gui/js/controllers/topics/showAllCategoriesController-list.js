@@ -1,13 +1,24 @@
 //viewAllTopicsController-list
 
-app.controller('showAllTopicsController-list', function($scope,$http,$log,topicMgmtAppConfig) {
+app.controller('showAllCategoriesController-list', function($scope,$http,$log,topicMgmtAppConfig) {
 	
 	var counter=1;
 	$scope.topic={};
 
-  $scope.topicObj={"title":"my title","description":""};  
+  $scope.topicObj={"title":"","description":""};  
   $scope.topicsList=[];  
   $scope.showPrivateTopics=false;
+  $scope.showCreateNewSection=false;
+  
+  $scope.showCreateSection=function(){
+	  $scope.showCreateNewSection= true;
+	  $log.log("value.personal : " + $scope.showCreateNewSection);
+  };
+  
+  $scope.hideCreateSection=function(){
+	  $scope.showCreateNewSection= false;
+	  $scope.topicObj.description=null;
+  };
   
   $scope.fetchTopicList=function(){	 
 			var urrrlll=topicMgmtAppConfig.restServices+"/topics";
@@ -59,7 +70,7 @@ app.controller('showAllTopicsController-list', function($scope,$http,$log,topicM
 	};
   
   
-  $scope.fetchTopicList();
+  //$scope.fetchTopicList();
   
   ////////////////////////
   $scope.propertyName = 'dateLastModified';

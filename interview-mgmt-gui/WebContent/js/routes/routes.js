@@ -13,12 +13,19 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/contact", {templateUrl: "partials/contact.html"/* , controller: "PshortDescriptionCtrl" */})
     // links
     .when("/links", {templateUrl: "partials/link-mgmt/links-list.html"/* , controller: "repeatController" */})
-	// topics
-    .when("/topics", {templateUrl: "partials/topics/showAllTopics.html", controller: "showAllTopicsController"})
-	.when("/topics-list", {templateUrl: "partials/topics/showAllCategories-list.html", controller: "showAllCategoriesController-list"})
-	.when("/topics-list/:id", {templateUrl: "partials/topics/showTopic.html", controller: "showTopicController"})
-	.when("/topics/new", {templateUrl: "partials/topics/createTopic.html", controller: "createTopicController"})
-	.when("/topics/:id", {templateUrl: "partials/topics/updateTopic.html" , controller: "updateTopicController"})
+	
+    // categories    
+	.when("/topics-list", {templateUrl: "partials/categories/showAllCategories-list.html", controller: "showAllCategoriesController-list"})
+	.when("/topics-list/:id", {templateUrl: "partials/categories/showCategory.html", controller: "showCategoryController"})
+	
+	// questions    
+	.when("/categories/:catID/questions", {templateUrl: "partials/questions/showAllQuestions-list.html", controller: "showAllQuestionsController-list"})
+	.when("/categories/:catID/questions/:quesID", {templateUrl: "partials/questions/showQuestion.html", controller: "showQuestionController"})
+	
+	// answers    
+	.when("/categories/:catID/questions/:quesID/answers", {templateUrl: "partials/answers/showAllAnswers-list.html", controller: "showAllAnswersController-list"})
+	.when("/categories/:catID/questions/:quesID/answers/:ansID", {templateUrl: "partials/answers/showAnswer.html", controller: "showAnswerController"})
+	
 	// groups
     .when("/groups", {templateUrl: "partials/groups/showAllGroups.html", controller: "showAllGroupsController"})
 	.when("/groups-list", {templateUrl: "partials/groups/showAllGroups-list.html", controller: "showAllGroupsController-list"})

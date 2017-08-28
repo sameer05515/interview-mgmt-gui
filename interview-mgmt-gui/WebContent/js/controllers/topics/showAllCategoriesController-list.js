@@ -1,32 +1,29 @@
 //viewAllTopicsController-list
 
-app.controller('showAllCategoriesController-list', function($scope,$http,$log,topicMgmtAppConfig) {
+app.controller('showAllCategoriesController-list', function($scope,$http,$log,topicMgmtAppConfig,InterviewManagementServices) {
 	
 	var counter=1;
 	$scope.topic={};
 
-  $scope.topicObj={"title":"","description":""};  
+  $scope.topicObj={"catID":"","catgoryName":null};  
   $scope.topicsList=[];  
   $scope.showPrivateTopics=false;
   $scope.showCreateNewSection=false;
   
   $scope.showCreateSection=function(){
 	  $scope.showCreateNewSection= true;
-	  $log.log("value.personal : " + $scope.showCreateNewSection);
+	  $scope.topicObj={"catID":"","catgoryName":""};
+	  $log.log("$scope.showCreateNewSection : " + $scope.showCreateNewSection);
   };
   
   $scope.hideCreateSection=function(){
 	  $scope.showCreateNewSection= false;
-	  $scope.topicObj.description=null;
+	  $scope.topicObj.catgoryName=null;
+	  $log.log("$scope.showCreateNewSection : " + $scope.showCreateNewSection);
   };
   
-  $scope.fetchTopicList=function(){	 
-			var urrrlll=topicMgmtAppConfig.restServices+"/topics";
-			$http(
-				{
-					method : 'GET',
-					url :urrrlll
-				})
+  $scope.fetchTopicList=function(){			
+	  InterviewManagementServices.fetchCategoriesList()
 				.success(function(data) {
 					//alert("Success : "+data);
 					$scope.topicsList=data;
@@ -35,9 +32,23 @@ app.controller('showAllCategoriesController-list', function($scope,$http,$log,to
 				})
 				.error(
 				function(data) {
-					alert("Error : "+data);
+					$log.log("Error : "+data);
 				});	 	  
 		  };
+		  
+	$scope.saveCategory=function(){
+		InterviewManagementServices.saveCategory($scope.topicObj)
+		.success(function(data) {
+			$log.log("Success : "+data);
+			
+			$scope.fetchTopicList();
+		})
+		.error(
+		function(data) {
+			$log.log("Error : "+data);
+		});	 	  
+  };
+
 		  
 	$scope.next=function(){
 		$scope.topic=$scope.topicsList[counter];
@@ -52,25 +63,19 @@ app.controller('showAllCategoriesController-list', function($scope,$http,$log,to
 	};
 	
 	$scope.filterPrivateTopics = function(value) {
-//	    var tgrObj = $scope.topicGroupsRelationList;
-//	    for (var i = 0; i < tgrObj.length; i++) {
-//	        // Search every object in the job.data array for a match. 
-//	        // If found return false to remove this object from the results
-//	        if (tgrObj[i].groups.id === value.id) {
-//	            return false;
-//	        }
-//	    }
-//		return true;
+
 		
-		var showValue=$scope.showPrivateTopics;
-		$log.log("value.personal : " + value.personal + " $scope.showPrivateTopics : "+showValue);
-		return (showValue||!value.personal);
+//		var showValue=$scope.showPrivateTopics;
+//		$log.log("value.personal : " + value.personal + " $scope.showPrivateTopics : "+showValue);
+//		return (showValue||!value.personal);
+		
+		return true;
 		
 		
 	};
   
   
-  //$scope.fetchTopicList();
+  $scope.fetchTopicList();
   
   ////////////////////////
   $scope.propertyName = 'dateLastModified';

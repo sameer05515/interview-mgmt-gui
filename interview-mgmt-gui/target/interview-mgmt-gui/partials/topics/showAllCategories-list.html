@@ -29,14 +29,17 @@
 				Topic<i class="fa fa-angle-right"></i>
 			</a>
 			
-			<trix-editor angular-trix ng-model="topicObj.description" ng-if="showCreateNewSection"></trix-editor>
-			<a class="btn btn-xs btn-primary"
-					ng-click="saveTopicGroupRelationList()"
-					ng-if="showCreateNewSection">Save</a> 
-					
-					<a class="btn btn-xs btn-primary"
-					ng-click="hideCreateSection()"
-					ng-if="showCreateNewSection">Cancel</a>
+			<div ng-show="showCreateNewSection">
+				<trix-editor angular-trix ng-model="topicObj.catgoryName" ng-show="showCreateNewSection"></trix-editor>
+				<a class="btn btn-xs btn-primary"
+						ng-click="saveCategory()"
+						ng-if="showCreateNewSection">Save</a> 
+						
+						<a class="btn btn-xs btn-primary"
+						ng-click="hideCreateSection()"
+						ng-if="showCreateNewSection">Cancel</a>
+			</div>
+			
 		</div>
 		
 		<!-- /well -->
@@ -49,8 +52,8 @@
 			<table class="friends">
 				<tr>
 					<th>
-						<button class="btn btn-xs btn-primary" ng-click="sortBy('title')">Title</button>
-						<span class="sortorder" ng-show="propertyName === 'title'"
+						<button class="btn btn-xs btn-primary" ng-click="sortBy('catgoryName')">Title</button>
+						<span class="sortorder" ng-show="propertyName === 'catgoryName'"
 						ng-class="{reverse: reverse}"></span>
 					</th>
 					<th>
@@ -87,9 +90,46 @@
 							</div>
 
 							<div class="col-md-11">
-								<h4>
-									<a href="#/topics-list/{{topic.id}}">{{topic.title}}</a>
-								</h4>
+								<h4 ng-bind-html="topic.catgoryName"></h4>
+								
+								<a class="btn btn-xs btn-primary"
+									ng-click="saveCategory()"
+									ng-if="true">Show Details</a>
+								<a class="btn btn-xs btn-primary"
+									ng-click="saveCategory()"
+									ng-if="true">Edit</a>
+								<a class="btn btn-xs btn-primary"
+									ng-click="saveCategory()"
+									ng-if="true">Delete</a>
+								
+								
+								<div data-ng-repeat="ques in topic.questions">
+									que: <h4 ng-bind-html="ques.question"></h4>
+									
+									<a class="btn btn-xs btn-primary"
+										ng-click="saveCategory()"
+										ng-if="true">Show Details</a>
+									<a class="btn btn-xs btn-primary"
+										ng-click="saveCategory()"
+										ng-if="true">Edit</a>
+									<a class="btn btn-xs btn-primary"
+										ng-click="saveCategory()"
+										ng-if="true">Delete</a>
+									
+									<div data-ng-repeat="answ in ques.answers">
+										ans: <h4 ng-bind-html="answ.answer"></h4>
+										
+										<a class="btn btn-xs btn-primary"
+											ng-click="saveCategory()"
+											ng-if="true">Show Details</a>
+										<a class="btn btn-xs btn-primary"
+											ng-click="saveCategory()"
+											ng-if="true">Edit</a>
+										<a class="btn btn-xs btn-primary"
+											ng-click="saveCategory()"
+											ng-if="true">Delete</a>										
+									</div>
+								</div>
 
 								<p>
 									Related Groups <a href="">grp 1</a> , <a href="">grp 2</a>
@@ -115,7 +155,7 @@
 								</p>
 
 								<a class="btn btn-xs btn-primary"
-									href="#/topics-list/{{topic.id}}">Read More <i
+									href="#/topics-list/{{topic.catID}}">Read More <i
 									class="fa fa-angle-right"></i></a>
 							</div>
 						</div>

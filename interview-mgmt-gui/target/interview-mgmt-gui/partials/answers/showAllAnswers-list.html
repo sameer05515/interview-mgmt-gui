@@ -95,14 +95,14 @@
 								</h2>
 								
 								<a class="btn btn-xs btn-primary"
-									href="#/categories/{{topic.catID}}"
+									href="#/topics-list/{{topic.catID}}"
 									ng-if="true">Show Details</a>
-								<!-- <a class="btn btn-xs btn-primary"
+								<a class="btn btn-xs btn-primary"
 									ng-click="alert('not implemented yet')"
 									ng-if="true">Edit</a>
 								<a class="btn btn-xs btn-primary"
 									ng-click="alert('not implemented yet')"
-									ng-if="true">Delete</a> -->
+									ng-if="true">Delete</a>
 								
 								<div class="row">
 								
@@ -112,30 +112,30 @@
 										</h3>										
 										
 										<a class="btn btn-xs btn-primary"
-											href="#/categories/{{ques.linkedCatID}}/questions/{{ques.questionID}}"
+											ng-click="alert('not implemented yet')"
 											ng-if="true">Show Details</a>
-										<!-- <a class="btn btn-xs btn-primary"
+										<a class="btn btn-xs btn-primary"
 											ng-click="alert('not implemented yet')"
 											ng-if="true">Edit</a>
 										<a class="btn btn-xs btn-primary"
 											ng-click="alert('not implemented yet')"
-											ng-if="true">Delete</a> -->
+											ng-if="true">Delete</a>
 											
 										<div class="row">
-											<div class="col-md-12 answersDisplay" data-ng-repeat="answ in ques.answers">
+											<div class="col-md-4 answersDisplay" data-ng-repeat="answ in ques.answers">
 												<h4>
 													ans : <span ng-bind-html="answ.answer"></span>
 												</h4>
 																							
 												<a class="btn btn-xs btn-primary"
-													href="#/categories/{{answ.linkedCatID}}/questions/{{answ.linkedQuesID}}/answers/{{answ.ansID}}"
+													ng-click="alert('not implemented yet')"
 													ng-if="true">Show Details</a>
-												<!-- <a class="btn btn-xs btn-primary"
+												<a class="btn btn-xs btn-primary"
 													ng-click="alert('not implemented yet')"
 													ng-if="true">Edit</a>
 												<a class="btn btn-xs btn-primary"
 													ng-click="alert('not implemented yet')"
-													ng-if="true">Delete</a> -->										
+													ng-if="true">Delete</a>										
 											</div>
 										</div>										
 										
@@ -169,7 +169,7 @@
 								</p>
 
 								<a class="btn btn-xs btn-primary"
-									href="#/categories/{{topic.catID}}">Read More <i
+									href="#/topics-list/{{topic.catID}}">Read More <i
 									class="fa fa-angle-right"></i></a>
 							</div>
 						</div>

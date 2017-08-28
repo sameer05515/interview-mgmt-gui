@@ -91,7 +91,7 @@ app.factory('InterviewManagementServices', [
 					headers : {
 						'Content-Type' : 'application/json'
 					},
-					data : angular.fromJson(categoryObj)
+					data : angular.fromJson(answerObj)
 				};
 
 				return $http(req);
@@ -138,7 +138,7 @@ app.factory('InterviewManagementServices', [
 					headers : {
 						'Content-Type' : 'application/json'
 					},
-					data : angular.fromJson(categoryObj)
+					data : angular.fromJson(answerObj)
 				};
 
 				return $http(req);

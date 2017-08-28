@@ -21,15 +21,40 @@
 					Category : <span ng-bind-html="topic.catgoryName"></span>
 				</h2>				
 				
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Edit</a>
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Delete</a>
-				<a class="btn btn-xs btn-primary"
-					href="alert('not implemented yet')"
-					ng-if="true">Add Questions</a>
+				<div ng-show="!showEditCategorySection && !showAddQuestionSection">
+					<a class="btn btn-xs btn-primary"
+						ng-click="showEditCategory()"
+						ng-if="true">Edit</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="alert('not implemented yet')"
+						ng-if="true">Delete</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="showAddQuestion()"
+						ng-if="true">Add Questions</a>
+				</div>
+				
+				<div ng-show="showEditCategorySection">
+					<trix-editor angular-trix ng-model="updateCategoryObj.catgoryName" ng-show="showEditCategorySection"></trix-editor>
+					<a class="btn btn-xs btn-primary"
+							ng-click="editCategory()"
+							ng-if="showEditCategorySection">Save</a> 
+							
+							<a class="btn btn-xs btn-primary"
+							ng-click="hideEditCategory()"
+							ng-if="showEditCategorySection">Cancel</a>
+				</div>
+				
+				<div ng-show="showAddQuestionSection">
+					<trix-editor angular-trix ng-model="questionObj.question" ng-show="showAddQuestionSection"></trix-editor>
+					<a class="btn btn-xs btn-primary"
+							ng-click="saveQuestion()"
+							ng-if="showAddQuestionSection">Save</a> 
+							
+							<a class="btn btn-xs btn-primary"
+							ng-click="hideAddQuestion()"
+							ng-if="showAddQuestionSection">Cancel</a>
+				</div>
+				
 			<hr>
 			
 			
@@ -51,7 +76,7 @@
 					ng-if="true">Delete</a>
 					
 				<div class="row">
-					<div class="col-md-4 answersDisplay" data-ng-repeat="answ in ques.answers">
+					<div class="col-md-12 answersDisplay" data-ng-repeat="answ in ques.answers">
 						<h4>
 							ans : <span ng-bind-html="answ.answer"></span>
 						</h4>

@@ -9,7 +9,7 @@
 .questionsDisplay {
     padding: 10px 10px 10px 10px;
     /** background: rgb(227, 250, 227);*/
-	 background: rgb(255, 255, 255);
+	 background: #00ff00255255255;
     border: 1px solid rgb(171, 239, 171);
     color: rgb(9, 56, 9);
 }
@@ -17,7 +17,7 @@
 .answersDisplay {
     padding: 10px 10px 10px 10px;
     /** background: rgb(227, 250, 227);*/
-	 background: rgb(255, 255, 255);
+	 background: #00ffff255255255;
     border: 1px solid rgb(171, 239, 171);
     color: rgb(9, 56, 9);
 }

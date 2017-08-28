@@ -20,6 +20,17 @@ app
 						"question" : null,
 						"linkedCatID":"0"
 					};
+					
+					$scope.updateQuestionObj = {
+						"questionID" : "0",
+						"question" : null,
+						"linkedCatID":"0"
+					};
+
+					$scope.answerObj = {
+						"answer" : null
+					};
+					
 					$scope.topicsList = [];
 
 					$scope.groupsList = [];
@@ -27,13 +38,92 @@ app
 					$scope.topicGroupsRelationList = [];
 
 					$scope.checked_groups = [];
+					
+					$scope.showEditQuestionSection = false;
+
+					$scope.showAddAnswerSection = false;
 					/** Variable Declaration end ################################ */
 
 					/** ##################################################################################################### */
 
 					/** Method Declaration start */
+					
+					$scope.showAddAnswer = function() {
+						$scope.showAddAnswerSection = true;
+						$scope.answerObj = {
+							"answer" : null
+						};
+						$log.log("$scope.showAddAnswerSection : "
+								+ $scope.showAddAnswerSection);
+					};
 
-					$scope.fetchTopicObj = function() {
+					$scope.hideAddAnswer = function() {
+						$scope.showAddAnswerSection = false;
+						$scope.answerObj = {
+							"answer" : null
+						};
+						$log.log("$scope.showAddAnswerSection : "
+								+ $scope.showAddAnswerSection);
+					};
+
+					$scope.saveAnswer = function() {
+						$log.log("Going to update : "
+								+ angular.toJson($scope.answerObj));
+						InterviewManagementServices.saveAnswer($scope.answerObj,
+								$routeParams.catID,$routeParams.quesID).success(function(data) {
+							// $log.log("Success : " + data);
+							$log.log("Success : " + angular.toJson(data));
+
+							$scope.fetchQuestionForCategory();
+							$scope.hideAddAnswer();
+						}).error(function(data) {
+							$log.log("Error : " + data);
+						});
+					};
+
+					// ########################
+
+					$scope.showEditQuestion = function() {
+						$scope.showEditQuestionSection = true;
+
+						$scope.updateQuestionObj = {
+								"questionID" : $scope.topic.questionID,
+								"question" : $scope.topic.question,
+								"linkedCatID":$scope.topic.linkedCatID
+							};
+
+						$log.log("$scope.showEditQuestionSection : "
+								+ $scope.showEditQuestionSection);
+					};
+
+					$scope.hideEditQuestion = function() {
+						$scope.showEditQuestionSection = false;
+						$scope.updateQuestionObj = {
+								"questionID" : "0",
+								"question" : null,
+								"linkedCatID":"0"
+							};
+						$log.log("$scope.showEditQuestionSection : "
+								+ $scope.showEditQuestionSection);
+					};
+
+					$scope.editQuestion = function() {
+						$log.log("Going to update : "
+								+ angular.toJson($scope.updateQuestionObj));
+						InterviewManagementServices.updateQuestion(
+								$scope.updateQuestionObj,$routeParams.catID).success(function(data) {
+							// $log.log("Success : " + data);
+							$log.log("Success : " + angular.toJson(data));
+
+							$scope.fetchQuestionForCategory();
+							$scope.hideEditQuestion();
+						}).error(function(data) {
+							$log.log("Error : " + data);
+						});
+					};
+					
+
+					$scope.fetchQuestionForCategory = function() {
 
 						InterviewManagementServices.fetchQuestionForCategory(
 								$routeParams.catID,$routeParams.quesID).success(function(data) {
@@ -192,7 +282,7 @@ app
 
 					/** Initial Method start */
 
-					$scope.fetchTopicObj();
+					$scope.fetchQuestionForCategory();
 
 					// $scope.fetchTopicGroupRelationList();
 

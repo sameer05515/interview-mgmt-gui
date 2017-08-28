@@ -17,59 +17,63 @@
 		<div class="col-lg-8">
 			<hr>
 				<h2>
-					Category : <span ng-bind-html="topic.question"></span>
+					Question : <span ng-bind-html="topic.question"></span>
 				</h2>				
 				
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Edit</a>
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Delete</a>
-				<a class="btn btn-xs btn-primary"
-					href="alert('not implemented yet')"
-					ng-if="true">Add Questions</a>
+				<div ng-show="!showEditQuestionSection && !showAddAnswerSection">
+					<a class="btn btn-xs btn-primary"
+						ng-click="showEditQuestion()"
+						ng-if="true">Edit</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="alert('not implemented yet')"
+						ng-if="true">Delete</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="showAddAnswer()"
+						ng-if="true">Add Answers</a>
+				</div>
+				
+				<div ng-show="showEditQuestionSection">
+					<trix-editor angular-trix ng-model="updateQuestionObj.question" ng-show="showEditQuestionSection"></trix-editor>
+					<a class="btn btn-xs btn-primary"
+							ng-click="editQuestion()"
+							ng-if="showEditQuestionSection">Save</a> 
+							
+							<a class="btn btn-xs btn-primary"
+							ng-click="hideEditQuestion()"
+							ng-if="showEditQuestionSection">Cancel</a>
+				</div>
+				
+				<div ng-show="showAddAnswerSection">
+					<trix-editor angular-trix ng-model="answerObj.answer" ng-show="showAddAnswerSection"></trix-editor>
+					<a class="btn btn-xs btn-primary"
+							ng-click="saveAnswer()"
+							ng-if="showAddAnswerSection">Save</a> 
+							
+							<a class="btn btn-xs btn-primary"
+							ng-click="hideAddAnswer()"
+							ng-if="showAddAnswerSection">Cancel</a>
+				</div>
+				
 			<hr>
 			
 			
 			<div class="row">
-								
-			<div class="col-md-12 questionsDisplay" data-ng-repeat="ques in topic.questions">
-				<h3>
-					que : <span ng-bind-html="ques.question"></span>
-				</h3>										
-				
-				<a class="btn btn-xs btn-primary"
-					href="#/categories/{{ques.linkedCatID}}/questions/{{ques.questionID}}"
-					ng-if="true">Show Details</a>
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Edit</a>
-				<a class="btn btn-xs btn-primary"
-					ng-click="alert('not implemented yet')"
-					ng-if="true">Delete</a>
-					
-				<div class="row">
-					<div class="col-md-4 answersDisplay" data-ng-repeat="answ in ques.answers">
-						<h4>
-							ans : <span ng-bind-html="answ.answer"></span>
-						</h4>
-																	
-						<a class="btn btn-xs btn-primary"
-							href="#/categories/{{answ.linkedCatID}}/questions/{{answ.linkedQuesID}}/answers/{{answ.ansID}}"
-							ng-if="true">Show Details</a>
-						<a class="btn btn-xs btn-primary"
-							ng-click="alert('not implemented yet')"
-							ng-if="true">Edit</a>
-						<a class="btn btn-xs btn-primary"
-							ng-click="alert('not implemented yet')"
-							ng-if="true">Delete</a>										
-					</div>
-				</div>										
-				
+				<div class="col-md-12 answersDisplay" data-ng-repeat="answ in topic.answers">
+					<h4>
+						ans : <span ng-bind-html="answ.answer"></span>
+					</h4>
+																
+					<a class="btn btn-xs btn-primary"
+						href="#/categories/{{answ.linkedCatID}}/questions/{{answ.linkedQuesID}}/answers/{{answ.ansID}}"
+						ng-if="true">Show Details</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="alert('not implemented yet')"
+						ng-if="true">Edit</a>
+					<a class="btn btn-xs btn-primary"
+						ng-click="alert('not implemented yet')"
+						ng-if="true">Delete</a>										
+				</div>
 			</div>
-		
-		</div>
 			
 			
 		</div>

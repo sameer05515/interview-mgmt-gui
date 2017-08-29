@@ -6,8 +6,16 @@
 				Question <small>: {{topic.title}}</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="">Home/Categories/Questions</a></li>
-				<li class="active">{{topic.title}}</li>
+				<li><a href="#/categories">HOME/CATEGORIES > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}">/CURRENT CATEGORY > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}/questions">QUESTIONS > </a></li>
+				<li class="active"> </li>
+				
+				<li class="active">CURRENT QUESTION</li>
 			</ol>
 		</div>
 	</div>

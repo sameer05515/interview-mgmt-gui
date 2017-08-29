@@ -6,8 +6,23 @@
 				Answers <small>: {{topic.title}}</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="">Home/Categories/Questions/Answers</a></li>
-				<li class="active">{{topic.title}}</li>
+				<li><a href="#/categories">HOME/CATEGORIES > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}">/CURRENT CATEGORY > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}/questions">QUESTIONS > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}/questions/{{topic.linkedQuesID}}">CURRENT QUESTION > </a></li>
+				<li class="active"> </li>
+				
+				<li><a href="#/categories/{{topic.linkedCatID}}/questions/{{topic.linkedQuesID}}/answers">ANSWERS > </a></li>
+				<li class="active"> </li>
+				
+				<li class="active">/CURRENT ANSWER > </li>
+
 			</ol>
 		</div>
 	</div>

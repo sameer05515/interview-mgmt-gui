@@ -31,13 +31,14 @@
 	<div class="row">
 		<div class="col-lg-8">
 			<hr>
-				<h2>
-					Answer : <span ng-bind-html="topic.answer"></span>
-				</h2>				
+				<!-- <h2> -->
+					Answer : <span star-rating rating-value="topic.rating" edit-star-rating="false" max="maxRatingValue"></span> 
+					<span ng-bind-html="topic.answer"></span>
+				<!-- </h2> -->				
 				
-				<div ng-show="!showEditQuestionSection">
+				<div ng-show="!showEditAnswerSection">
 					<a class="btn btn-xs btn-primary"
-						ng-click="showEditQuestion()"
+						ng-click="showEditAnswer()"
 						ng-if="true">Edit</a>
 					<a class="btn btn-xs btn-primary"
 						ng-click="alert('not implemented yet')"
@@ -45,15 +46,16 @@
 				</div>
 				
 					
-				<div ng-show="showEditQuestionSection">
-					<trix-editor angular-trix ng-model="updateQuestionObj.answer" ng-show="showEditQuestionSection"></trix-editor>
+				<div ng-show="showEditAnswerSection">
+					<trix-editor angular-trix ng-model="updateAnswerObj.answer" ng-show="showEditAnswerSection"></trix-editor>
+					<div star-rating rating-value="updateAnswerObj.rating" edit-star-rating="true" max="maxRatingValue" on-rating-selected="getSelectedRating(rating)"></div>
 					<a class="btn btn-xs btn-primary"
-							ng-click="editQuestion()"
-							ng-if="showEditQuestionSection">Save</a> 
+							ng-click="editAnswer()"
+							ng-if="showEditAnswerSection">Save</a> 
 							
 							<a class="btn btn-xs btn-primary"
 							ng-click="hideEditQuestion()"
-							ng-if="showEditQuestionSection">Cancel</a>
+							ng-if="showEditAnswerSection">Cancel</a>
 				</div>				
 			<hr>
 			

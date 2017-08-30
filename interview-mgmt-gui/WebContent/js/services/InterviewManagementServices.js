@@ -202,6 +202,9 @@ app.factory('InterviewManagementServices', [
 				return counter;
 
 			};
+			
+			InterviewManagementServices.maxInterviewMgmtRatingValue=
+				topicMgmtAppConfig.maxInterviewMgmtRatingValue;
 
 			return InterviewManagementServices;
 

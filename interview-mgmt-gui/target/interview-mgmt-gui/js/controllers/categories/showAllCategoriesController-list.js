@@ -12,11 +12,16 @@ app
 
 					$scope.topicObj = {
 						"catID" : "",
-						"catgoryName" : null
+						"catgoryName" : null,
+						"rating" : 1
 					};
 					$scope.topicsList = [];
 					$scope.showPrivateTopics = false;
-					$scope.showCreateNewSection = false;
+					$scope.showCategoryQuestions=false;
+					$scope.showCategoryQuestionAnswers=false;
+					$scope.showCreateNewCategorySection = false;
+					
+					$scope.maxRatingValue=InterviewManagementServices.maxInterviewMgmtRatingValue;
 
 					/** Variable Declaration end ################################ */
 
@@ -25,29 +30,42 @@ app
 					/** Method Declaration start */
 
 					$scope.showCreateSection = function() {
-						$scope.showCreateNewSection = true;
+						$scope.showCreateNewCategorySection = true;
 						$scope.topicObj = {
 							"catID" : "",
-							"catgoryName" : ""
+							"catgoryName" : "",
+							"rating" : 1
 						};
-						$log.log("$scope.showCreateNewSection : "
-								+ $scope.showCreateNewSection);
+						$log.log("$scope.showCreateNewCategorySection : "
+								+ $scope.showCreateNewCategorySection);
 					};
 
 					$scope.hideCreateSection = function() {
-						$scope.showCreateNewSection = false;
+						$scope.showCreateNewCategorySection = false;
 						$scope.topicObj.catgoryName = null;
-						$log.log("$scope.showCreateNewSection : "
-								+ $scope.showCreateNewSection);
+						$log.log("$scope.showCreateNewCategorySection : "
+								+ $scope.showCreateNewCategorySection);
 					};
 
 					$scope.fetchTopicList = function() {
+						
+						$scope.topicsList = [];
+						
 						InterviewManagementServices.fetchCategoriesList()
 								.success(function(data) {
-									// alert("Success : "+data);
-									$scope.topicsList = data;
 
-									$scope.next();
+									$scope.topicsList = data;
+									
+									for (var i=0; i<data.length; i++){
+										if(axis.isObject(data[i])){
+											data[i].showEditCategorySection=false;
+											data[i].showAddQuestionSection=false;
+											$scope.topicsList.push(data[i]);
+										}
+										
+									}
+
+									//$scope.next();
 								}).error(function(data) {
 									$log.log("Error : " + data);
 								});
@@ -58,6 +76,7 @@ app
 								$scope.topicObj).success(function(data) {
 							$log.log("Success : " + data);
 
+							$scope.hideCreateSection();
 							$scope.fetchTopicList();
 						}).error(function(data) {
 							$log.log("Error : " + data);
@@ -90,7 +109,7 @@ app
 					};
 
 					// //////////////////////
-					$scope.propertyName = 'dateLastModified';
+					$scope.propertyName = 'dateCreated';
 					$scope.reverse = true;
 					// $scope.friends = friends;
 
@@ -99,6 +118,10 @@ app
 								: false;
 						$scope.propertyName = propertyName;
 					};
+					
+					$scope.getSelectedRating = function (rating) {
+				        console.log(rating);
+				    }
 
 					/** Method Declaration end ################################ */
 

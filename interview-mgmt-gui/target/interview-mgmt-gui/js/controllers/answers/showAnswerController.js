@@ -19,14 +19,16 @@ app
 						    "ansID": "0",
 						    "answer": null,
 						    "linkedCatID": "0",
-						    "linkedQuesID": "0"
+						    "linkedQuesID": "0",
+							"rating" : 1
 						};
 					
-					$scope.updateQuestionObj = {
+					$scope.updateAnswerObj = {
 						    "ansID": "0",
 						    "answer": null,
 						    "linkedCatID": "0",
-						    "linkedQuesID": "0"
+						    "linkedQuesID": "0",
+							"rating" : 1
 						};
 					
 					$scope.topicsList = [];
@@ -37,44 +39,48 @@ app
 
 					$scope.checked_groups = [];
 					
-					$scope.showEditQuestionSection = false;
+					$scope.showEditAnswerSection = false;
+					
+					$scope.maxRatingValue=InterviewManagementServices.maxInterviewMgmtRatingValue;
 					/** Variable Declaration end ################################ */
 
 					/** ##################################################################################################### */
 
 					/** Method Declaration start */
 					
-					$scope.showEditQuestion = function() {
-						$scope.showEditQuestionSection = true;
+					$scope.showEditAnswer = function() {
+						$scope.showEditAnswerSection = true;
 
-						$scope.updateQuestionObj = {
+						$scope.updateAnswerObj = {
 							    "ansID": $scope.topic.ansID,
 							    "answer": $scope.topic.answer,
 							    "linkedCatID": $scope.topic.linkedCatID,
-							    "linkedQuesID": $scope.topic.linkedQuesID
+							    "linkedQuesID": $scope.topic.linkedQuesID,
+								"rating" : $scope.topic.rating
 							};
 
-						$log.log("$scope.showEditQuestionSection : "
-								+ $scope.showEditQuestionSection);
+						$log.log("$scope.showEditAnswerSection : "
+								+ $scope.showEditAnswerSection);
 					};
 
 					$scope.hideEditQuestion = function() {
-						$scope.showEditQuestionSection = false;
-						$scope.updateQuestionObj = {
+						$scope.showEditAnswerSection = false;
+						$scope.updateAnswerObj = {
 							    "ansID": "0",
 							    "answer": null,
 							    "linkedCatID": "0",
-							    "linkedQuesID": "0"
+							    "linkedQuesID": "0",
+								"rating" : 1
 							};
-						$log.log("$scope.showEditQuestionSection : "
-								+ $scope.showEditQuestionSection);
+						$log.log("$scope.showEditAnswerSection : "
+								+ $scope.showEditAnswerSection);
 					};
 
-					$scope.editQuestion = function() {
+					$scope.editAnswer = function() {
 						$log.log("Going to update : "
-								+ angular.toJson($scope.updateQuestionObj));
+								+ angular.toJson($scope.updateAnswerObj));
 						InterviewManagementServices.updateAnswer(
-								$scope.updateQuestionObj,$routeParams.catID,$routeParams.quesID).success(function(data) {
+								$scope.updateAnswerObj,$routeParams.catID,$routeParams.quesID).success(function(data) {
 							// $log.log("Success : " + data);
 							$log.log("Success : " + angular.toJson(data));
 
@@ -123,6 +129,10 @@ app
 								: (counter - 1);
 
 					};
+					
+					$scope.getSelectedRating = function (rating) {
+				        console.log(rating);
+				    }
 
 //					$scope.fetchGroupList = function() {
 //						$scope.groupsList = [];

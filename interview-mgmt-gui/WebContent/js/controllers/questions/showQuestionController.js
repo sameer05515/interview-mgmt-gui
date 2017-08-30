@@ -18,13 +18,15 @@ app
 					$scope.topicObj = {
 						"questionID" : "0",
 						"question" : null,
-						"linkedCatID":"0"
+						"linkedCatID":"0",
+						"rating" : 1
 					};
 					
 					$scope.updateQuestionObj = {
 						"questionID" : "0",
 						"question" : null,
-						"linkedCatID":"0"
+						"linkedCatID":"0",
+						"rating" : 1
 					};
 
 					$scope.answerObj = {
@@ -42,6 +44,8 @@ app
 					$scope.showEditQuestionSection = false;
 
 					$scope.showAddAnswerSection = false;
+					
+					$scope.maxRatingValue=InterviewManagementServices.maxInterviewMgmtRatingValue;
 					/** Variable Declaration end ################################ */
 
 					/** ##################################################################################################### */
@@ -89,7 +93,8 @@ app
 						$scope.updateQuestionObj = {
 								"questionID" : $scope.topic.questionID,
 								"question" : $scope.topic.question,
-								"linkedCatID":$scope.topic.linkedCatID
+								"linkedCatID":$scope.topic.linkedCatID,
+								"rating" : $scope.topic.rating
 							};
 
 						$log.log("$scope.showEditQuestionSection : "
@@ -101,7 +106,8 @@ app
 						$scope.updateQuestionObj = {
 								"questionID" : "0",
 								"question" : null,
-								"linkedCatID":"0"
+								"linkedCatID":"0",
+								"rating" : 1
 							};
 						$log.log("$scope.showEditQuestionSection : "
 								+ $scope.showEditQuestionSection);
@@ -161,6 +167,10 @@ app
 								: (counter - 1);
 
 					};
+					
+					$scope.getSelectedRating = function (rating) {
+				        console.log(rating);
+				    }
 
 //					$scope.fetchGroupList = function() {
 //						$scope.groupsList = [];

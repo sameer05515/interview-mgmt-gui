@@ -15,94 +15,151 @@
 
 
 	<div class="row">
+		<div class="well col-lg-8">
+			<hr />
+			<!-- <h2> -->
+			Category : <span star-rating rating-value="retrievedCategory.rating"
+				edit-star-rating="false" max="maxRatingValue"></span> <span
+				ng-bind-html="retrievedCategory.catgoryName"></span>
+			<!-- </h2> -->
+
+			<div ng-show="!showEditCategorySection && !showAddQuestionSection">
+				<a class="btn btn-xs btn-primary" ng-click="showEditCategory()"
+					ng-if="true">Edit</a> <a class="btn btn-xs btn-primary"
+					ng-click="alert('not implemented yet')" ng-if="true">Delete</a> <a
+					class="btn btn-xs btn-primary" ng-click="showAddQuestion()"
+					ng-if="true">Add Questions</a>
+			</div>
+
+			<div ng-show="showEditCategorySection">
+				<trix-editor angular-trix ng-model="updateCategoryObj.catgoryName"
+					ng-show="showEditCategorySection"></trix-editor>
+				<div star-rating rating-value="updateCategoryObj.rating"
+					edit-star-rating="true" max="maxRatingValue"
+					on-rating-selected="getSelectedRating(rating)"></div>
+				<a class="btn btn-xs btn-primary" ng-click="editCategory()"
+					ng-if="showEditCategorySection">Save</a> <a
+					class="btn btn-xs btn-primary" ng-click="hideEditCategory()"
+					ng-if="showEditCategorySection">Cancel</a>
+			</div>
+
+			<div ng-show="showAddQuestionSection">
+				<trix-editor angular-trix ng-model="questionObj.question"
+					ng-show="showAddQuestionSection"></trix-editor>
+				<div star-rating rating-value="questionObj.rating"
+					edit-star-rating="true" max="maxRatingValue"
+					on-rating-selected="getSelectedRating(rating)"></div>
+				<a class="btn btn-xs btn-primary" ng-click="saveQuestion()"
+					ng-if="showAddQuestionSection">Save</a> <a
+					class="btn btn-xs btn-primary" ng-click="hideAddQuestion()"
+					ng-if="showAddQuestionSection">Cancel</a>
+			</div>
+
+			<hr />
+			
+			<h4>Question Search:</h4>
+
+			<div class="input-group">
+				<input type="text" data-ng-model="searchText" class="form-control">
+			</div>
+			<!-- /input-group -->
+			You are typing "{{searchText}}" <br /> Number of filtered items:
+			{{filteredItems.length}} <br />
+			<p ng-hide="filteredItems.length">There is no result</p>
+
+		</div>
+	</div>
+
+
+	<div class="row">
 		<div class="col-lg-8">
-			<hr>
-				<!-- <h2> -->
-					Category : <span star-rating rating-value="retrievedCategory.rating" edit-star-rating="false" max="maxRatingValue"></span>
-					<span ng-bind-html="retrievedCategory.catgoryName"></span>
-				<!-- </h2> -->				
-				
-				<div ng-show="!showEditCategorySection && !showAddQuestionSection">
-					<a class="btn btn-xs btn-primary"
-						ng-click="showEditCategory()"
-						ng-if="true">Edit</a>
-					<a class="btn btn-xs btn-primary"
-						ng-click="alert('not implemented yet')"
-						ng-if="true">Delete</a>
-					<a class="btn btn-xs btn-primary"
-						ng-click="showAddQuestion()"
-						ng-if="true">Add Questions</a>
-				</div>
-				
-				<div ng-show="showEditCategorySection">
-					<trix-editor angular-trix ng-model="updateCategoryObj.catgoryName" ng-show="showEditCategorySection"></trix-editor>
-					<div star-rating rating-value="updateCategoryObj.rating" edit-star-rating="true" max="maxRatingValue" on-rating-selected="getSelectedRating(rating)"></div>
-					<a class="btn btn-xs btn-primary"
-							ng-click="editCategory()"
-							ng-if="showEditCategorySection">Save</a> 
-							
-							<a class="btn btn-xs btn-primary"
-							ng-click="hideEditCategory()"
-							ng-if="showEditCategorySection">Cancel</a>
-				</div>
-				
-				<div ng-show="showAddQuestionSection">
-					<trix-editor angular-trix ng-model="questionObj.question" ng-show="showAddQuestionSection"></trix-editor>
-					<div star-rating rating-value="questionObj.rating" edit-star-rating="true" max="maxRatingValue" on-rating-selected="getSelectedRating(rating)"></div>
-					<a class="btn btn-xs btn-primary"
-							ng-click="saveQuestion()"
-							ng-if="showAddQuestionSection">Save</a> 
-							
-							<a class="btn btn-xs btn-primary"
-							ng-click="hideAddQuestion()"
-							ng-if="showAddQuestionSection">Cancel</a>
-				</div>
-				
-			<hr>
-			
-			
+			<!--####################-->
+			<table class="friends">
+				<tr>
+					<th>
+						<button class="btn btn-xs btn-primary"
+							ng-click="sortBy('catgoryName')">Title</button> <span
+						class="sortorder" ng-show="propertyName === 'catgoryName'"
+						ng-class="{reverse: reverse}"></span>
+					</th>
+					<th>
+						<button class="btn btn-xs btn-primary"
+							ng-click="sortBy('dateLastModified')">Last Modified</button> <span
+						class="sortorder" ng-show="propertyName === 'dateLastModified'"
+						ng-class="{reverse: reverse}"></span>
+					</th>
+					<th>
+						<button class="btn btn-xs btn-primary"
+							ng-click="sortBy('dateCreated')">Creation Date</button> <span
+						class="sortorder" ng-show="propertyName === 'dateCreated'"
+						ng-class="{reverse: reverse}"></span>
+					</th>
+					<th>
+						<button class="btn btn-xs btn-primary" ng-click="sortBy('rating')">Rating</button>
+						<span class="sortorder" ng-show="propertyName === 'rating'"
+						ng-class="{reverse: reverse}"></span>
+					</th>
+					<th><b><input type="checkbox" ng-model="showPrivateTopics" />Show
+							Private Topics</b></th>
+					<th><b><input type="checkbox"
+							ng-model="showCategoryQuestions" />Show Questions</b></th>
+					<th ng-show="showCategoryQuestions"><b><input
+							type="checkbox" ng-model="showCategoryQuestionAnswers" />Show
+							Answers</b></th>
+
+				</tr>
+
+			</table>
+			<!--####################-->
+
+
 			<div class="row">
-								
-			<div class="col-md-12 questionsDisplay" data-ng-repeat="ques in retrievedCategory.questions">
-				<h3>
-					Question : <span star-rating rating-value="ques.rating" max="maxRatingValue"></span>
-					<span ng-bind-html="ques.question"></span>
-				</h3>										
-				
-				<a class="btn btn-xs btn-primary"
-					href="#/categories/{{ques.linkedCatID}}/questions/{{ques.questionID}}"
-					ng-if="true">Show Details</a>
-				<!-- <a class="btn btn-xs btn-primary"
+
+				<div class="col-md-12 questionsDisplay"
+					data-ng-repeat="ques in (filteredItems=(retrievedCategory.questions|filter:searchText |filter:filterPrivateTopics |orderBy:propertyName:reverse) )">
+					<h3>
+						Question :[{{$index + 1}}] <span star-rating rating-value="ques.rating"
+							max="maxRatingValue"></span> <span ng-bind-html="ques.question"></span>
+					</h3>
+
+					<a class="btn btn-xs btn-primary"
+						href="#/categories/{{ques.linkedCatID}}/questions/{{ques.questionID}}"
+						ng-if="true">Show Details</a>
+					<!-- <a class="btn btn-xs btn-primary"
 					ng-click="alert('not implemented yet')"
 					ng-if="true">Edit</a>
 				<a class="btn btn-xs btn-primary"
 					ng-click="alert('not implemented yet')"
 					ng-if="true">Delete</a> -->
-					
-				<div class="row">
-					<div class="col-md-12 answersDisplay" data-ng-repeat="answ in ques.answers">
-						<h4>
-							Answer : <span star-rating rating-value="answ.rating" max="maxRatingValue"></span>
-							<span ng-bind-html="answ.answer"></span>
-						</h4>
-																	
-						<a class="btn btn-xs btn-primary"
-							href="#/categories/{{answ.linkedCatID}}/questions/{{answ.linkedQuesID}}/answers/{{answ.ansID}}"
-							ng-if="true">Show Details</a>
-						<!-- <a class="btn btn-xs btn-primary"
+
+					<div class="row">
+						<div class="col-md-1">
+						
+						</div>
+						<div class="col-md-11 answersDisplay"
+							data-ng-repeat="answ in ques.answers">
+							<h4>
+								Answer :[{{$index + 1}}] <span star-rating rating-value="answ.rating"
+									max="maxRatingValue"></span> <span ng-bind-html="answ.answer"></span>
+							</h4>
+
+							<a class="btn btn-xs btn-primary"
+								href="#/categories/{{answ.linkedCatID}}/questions/{{answ.linkedQuesID}}/answers/{{answ.ansID}}"
+								ng-if="true">Show Details</a>
+							<!-- <a class="btn btn-xs btn-primary"
 							ng-click="alert('not implemented yet')"
 							ng-if="true">Edit</a>
 						<a class="btn btn-xs btn-primary"
 							ng-click="alert('not implemented yet')"
-							ng-if="true">Delete</a> -->										
+							ng-if="true">Delete</a> -->
+						</div>
 					</div>
-				</div>										
-				
+
+				</div>
+
 			</div>
-		
-		</div>
-			
-			
+
+
 		</div>
 		<!--End Column col-lg-8-->
 
@@ -123,8 +180,9 @@
 					<i class="fa fa-clock-o"></i> Created on <b><span
 						ng-bind="retrievedCategory.dateCreated | date:'MMM/dd/yyyy hh:mm:ss a'"></span></b>
 				</p>
-				<a class="btn btn-xs btn-primary" href="#/topics/{{retrievedCategory.id}}">Modify
-					<i class="fa fa-angle-right"></i>
+				<a class="btn btn-xs btn-primary"
+					href="#/topics/{{retrievedCategory.id}}">Modify <i
+					class="fa fa-angle-right"></i>
 				</a> <a class="btn btn-xs btn-primary" href="#/topics-list">Back to
 					list <i class="fa fa-angle-right"></i>
 				</a>
@@ -147,9 +205,8 @@
 				</div>
 				<a class="btn btn-xs btn-primary"
 					ng-click="saveTopicGroupRelationList()"
-					ng-if="filteredGroupItems.length>0">Save</a> 
-					
-					<a class="btn btn-xs btn-primary"
+					ng-if="filteredGroupItems.length>0">Save</a> <a
+					class="btn btn-xs btn-primary"
 					ng-click="resetGroupsAndShowTopicGroupRelations()"
 					ng-if="filteredGroupItems.length>0">Cancel</a>
 				<!-- {{checked_groups}} -->
@@ -172,7 +229,8 @@
 			<div class="well">
 				<!-- Related Topics lists comes from all Topics which are part of groups to which current Topic is associated with. -->
 				<h4>Related Topics</h4>
-				<br /> <a href="">retrievedCategory 1</a> <br /> <a href="">retrievedCategory 2</a>
+				<br /> <a href="">retrievedCategory 1</a> <br /> <a href="">retrievedCategory
+					2</a>
 			</div>
 			<!-- /well -->
 

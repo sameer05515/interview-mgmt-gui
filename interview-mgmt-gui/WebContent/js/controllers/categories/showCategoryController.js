@@ -177,6 +177,17 @@ app
 								: (counter - 1);
 
 					};
+					
+					// //////////////////////
+					$scope.propertyName = 'dateCreated';
+					$scope.reverse = true;
+					// $scope.friends = friends;
+
+					$scope.sortBy = function(propertyName) {
+						$scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse
+								: false;
+						$scope.propertyName = propertyName;
+					};
 
 					$scope.getSelectedRating = function(rating) {
 						console.log(rating);

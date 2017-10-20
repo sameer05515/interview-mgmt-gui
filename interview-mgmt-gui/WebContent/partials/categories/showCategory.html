@@ -102,10 +102,10 @@
 					<th><b><input type="checkbox" ng-model="showPrivateTopics" />Show
 							Private Topics</b></th>
 					<th><b><input type="checkbox"
-							ng-model="showCategoryQuestions" />Show Questions</b></th>
-					<th ng-show="showCategoryQuestions"><b><input
+							ng-model="showCategoryQuestionAnswers" />Show Answers</b></th>
+					<!-- <th ng-show="showCategoryQuestions"><b><input
 							type="checkbox" ng-model="showCategoryQuestionAnswers" />Show
-							Answers</b></th>
+							Answers</b></th> -->
 
 				</tr>
 
@@ -132,7 +132,7 @@
 					ng-click="alert('not implemented yet')"
 					ng-if="true">Delete</a> -->
 
-					<div class="row">
+					<div class="row" ng-show="showCategoryQuestionAnswers">
 						<div class="col-md-1">
 						
 						</div>

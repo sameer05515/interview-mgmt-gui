@@ -8,6 +8,7 @@ app
 
 					/** Variable Declaration start */
 					$scope.retrievedCategory = {};
+					$scope.showCategoryQuestionAnswers=false;
 
 					/*
 					 * $scope.retrievedCategoryObj = { "title" : "my title", "description" : "" };

@@ -7,7 +7,7 @@
 				All Categories <small>: A Brief overview</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#/categories/">HOME/CATEGORIES > </a></li>
+				<li><a href="#/categories-list/">HOME/CATEGORIES > </a></li>
 				<li class="active">All Categories</li>
 			</ol>
 		</div>
@@ -115,8 +115,8 @@
 									Category :[{{$index + 1}}] <span star-rating
 										rating-value="topic.rating" edit-star-rating="false"
 										max="maxRatingValue"></span> <span>Total Questions :
-										{{topic.questions.length}}</span> <span
-										ng-bind-html="topic.catgoryName"></span>
+										{{topic.questions.length}}</span> <font color="green"><span
+										ng-bind-html="topic.catgoryName"></span></font>
 								</h2>
 
 								<!-- <div ng-show="!topic.showEditCategorySection && !topic.showAddQuestionSection"> -->
@@ -160,18 +160,29 @@
 
 									<div class="col-md-12 questionsDisplay"
 										data-ng-repeat="ques in topic.questions">
+										
+										{{ques}}
+										
 										<h3>
 											Question :[{{$index + 1}}] <span star-rating
 												rating-value="ques.rating" edit-star-rating="false"
 												max="maxRatingValue"></span> <i class="fa fa-clock-o"></i>
 											Last Modified on <b><span
 												ng-bind="ques.dateLastModified | date:'MMM/dd/yyyy hh:mm:ss a'"></span></b>
-											<span ng-bind-html="ques.question"></span>
+												
+												<i class="fa fa-clock-o"></i>
+											Last Read on <b><span
+												ng-bind="ques.dateLastRead | date:'MMM/dd/yyyy hh:mm:ss a'"></span></b>
+												Total Reads <b><span>{{ques.totalRead}}</span></b>
+											<font color="red"><span ng-bind-html="ques.question"></span></font>
 										</h3>
 
 										<a class="btn btn-xs btn-primary"
 											href="#/categories/{{ques.linkedCatID}}/questions/{{ques.questionID}}"
 											ng-if="true">Show Details</a>
+										<a class="btn btn-xs btn-primary"
+											ng-click="alert('not implemented yet')"
+											ng-if="true">Read</a>
 										<!-- <a class="btn btn-xs btn-primary"
 											ng-click="alert('not implemented yet')"
 											ng-if="true">Edit</a>

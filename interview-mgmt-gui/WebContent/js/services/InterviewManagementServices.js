@@ -129,6 +129,21 @@ app.factory('InterviewManagementServices', [
 				return $http(req);
 			};
 			
+			InterviewManagementServices.markReadQuestion = function(
+					questionObj,catID,questionID) {
+
+				var req = {
+					method : 'PUT',
+					url : topicMgmtAppConfig.interviewMgmtServices + "/categories/"+ catID+"/questions/"+questionID+"/markread",
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					data : angular.fromJson(questionObj)
+				};
+
+				return $http(req);
+			};
+			
 			InterviewManagementServices.updateAnswer = function(
 					answerObj,catID,questionID) {
 

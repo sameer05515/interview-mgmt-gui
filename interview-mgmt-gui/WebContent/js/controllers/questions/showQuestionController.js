@@ -136,6 +136,17 @@ app
 							// $log.log("Success : "+data);
 							$scope.topicObj = data;
 							$scope.topic = $scope.topicObj;
+							
+							$log
+							.log("Successfully fetched question for " 
+									+"catID "
+									+ $routeParams.catID
+									+"quesID "
+									+ $routeParams.quesID
+									+ " : "
+									+ angular
+											.toJson(data));
+							
 						}).error(function(data) {
 							$log.log("Error : " + data);
 						});

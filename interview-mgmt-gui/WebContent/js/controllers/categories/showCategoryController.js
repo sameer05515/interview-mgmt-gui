@@ -87,6 +87,26 @@ app
 							$log.log("Error : " + data);
 						});
 					};
+					
+					// ###############################
+					$scope.markReadQuestion = function(questObj) {
+						$log.log("Going to mark read : "
+								+ angular.toJson(questObj));
+						InterviewManagementServices.markReadQuestion(
+								questionObj, $routeParams.id,questObj.questionID).success(
+								function(data) {
+									// $log.log("Success : " + data);
+									$log.log("Success : "
+											+ angular.toJson(data));
+
+									$scope.fetchCategory();
+									$scope.hideAddQuestion();
+								}).error(function(data) {
+							$log.log("Error : " + data);
+						});
+					};
+					
+					//###############################
 
 					// ########################
 

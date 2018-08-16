@@ -6,7 +6,7 @@
 				Category <small>: {{retrievedCategory.title}}</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#/categories">HOME/CATEGORIES > </a></li>
+				<li><a href="#/categories-list">HOME/CATEGORIES > </a></li>
 				<li class="active">CURRENT CATEGORY</li>
 			</ol>
 		</div>
@@ -119,7 +119,18 @@
 					data-ng-repeat="ques in (filteredItems=(retrievedCategory.questions|filter:searchText |filter:filterPrivateTopics |orderBy:propertyName:reverse) )">
 					<h3>
 						Question :[{{$index + 1}}] <span star-rating rating-value="ques.rating"
-							max="maxRatingValue"></span> <span ng-bind-html="ques.question"></span>
+							max="maxRatingValue"></span> 
+							
+							
+							ques.dateLastRead{{ques}}
+							<i class="fa fa-clock-o"></i>
+											Last Read on <b><span
+												ng-bind="ques.dateLastRead | date:'MMM/dd/yyyy hh:mm:ss a'"></span></b>
+												Total Reads <b><span>{{ques.totalRead}}</span></b>
+							
+							<font color="red">
+								<span ng-bind-html="ques.question"></span>
+							</font>
 					</h3>
 
 					<a class="btn btn-xs btn-primary"

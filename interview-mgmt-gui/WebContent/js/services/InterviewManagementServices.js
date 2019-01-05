@@ -1,12 +1,22 @@
 app.factory('InterviewManagementServices', [
-		'$http',
+		'$http','$log',
 		'$routeParams',
 		'topicMgmtAppConfig',
-		function($http, $routeParams, topicMgmtAppConfig) {
+		function($http,$log, $routeParams, topicMgmtAppConfig) {
 
 			var InterviewManagementServices = {};
 			
-			/**Fetch all Categories, Questions, Answers list*/
+            /**Fetch all Categories, Questions, Answers list*/
+            
+            InterviewManagementServices.fetchAnswersJson = function() {
+
+
+                $log.log("fetchAnswersJson is  being called");
+
+                return $http.get(topicMgmtAppConfig.interviewMgmtServices + "/report/allQuestions");
+                
+			};
+
 
 			InterviewManagementServices.fetchCategoriesList = function() {
 
@@ -218,8 +228,8 @@ app.factory('InterviewManagementServices', [
 
 			};
 			
-			InterviewManagementServices.maxInterviewMgmtRatingValue=
-				topicMgmtAppConfig.maxInterviewMgmtRatingValue;
+			InterviewManagementServices.maxInterviewMgmtRatingValue=10;
+				//topicMgmtAppConfig.maxInterviewMgmtRatingValue;
 
 			return InterviewManagementServices;
 

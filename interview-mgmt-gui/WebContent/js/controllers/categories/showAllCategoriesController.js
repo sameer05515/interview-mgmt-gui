@@ -2,8 +2,8 @@
 
 app
 		.controller(
-				'showAllTopicsController',
-				function($scope, $http, topicMgmtAppConfig) {
+				'showAllCategoriesController',
+				function($scope, $http,$log, topicMgmtAppConfig,InterviewManagementServices) {
 
 					$scope.topicObj = {
 						"title" : "my title",
@@ -31,17 +31,21 @@ app
 					};
 
 					$scope.fetchTopicList = function() {
-						var urrrlll = topicMgmtAppConfig.restServices
-								+ "/topics";
-						$http({
-							method : 'GET',
-							url : urrrlll
-						}).success(function(data) {
+                        InterviewManagementServices.fetchAnswersJson()
+                        .success(function(data) {
 							// alert("Success : "+data);
 							$scope.topicsList = data;
-							// $scope.sortBy($scope.propertyName);
+                            // $scope.sortBy($scope.propertyName);
+                            
+                            $log
+									.log("Successfully fetched category list "
+											+ " : "
+											+ angular
+													.toJson($scope.topicsList));
+
 						}).error(function(data) {
-							alert("Error : " + data);
+                            $log.log("Error : " + data);
+							// alert("Error : " + data);
 						});
 					};
 

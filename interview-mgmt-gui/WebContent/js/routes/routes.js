@@ -13,7 +13,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/contact", {templateUrl: "partials/contact.html"/* , controller: "PshortDescriptionCtrl" */})
     // links
     .when("/links", {templateUrl: "partials/link-mgmt/links-list.html"/* , controller: "repeatController" */})
-	
+	.when("/questions-single-view", {templateUrl: "partials/categories/questionsSingleView.html" , controller: "questionsSingleViewController" })
     // categories
     .when("/question-report", {templateUrl: "partials/categories/showAllCategories.html", controller: "showAllCategoriesController"})
 	.when("/categories-list", {templateUrl: "partials/categories/showAllCategories-list.html", controller: "showAllCategoriesController-list"})
